@@ -3,11 +3,17 @@ import { useAppSelector, useAppDispatch } from '../../../../../../store/hook';
 import { startGetAllProductos } from '../../../../../../store/Productos/thunks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeProducto = () => {
 
   const { allProductos } = useAppSelector((state) => state.productos)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(startGetAllProductos());
+  }, [])    
 
   return (
     <section className={`${styles.HomeProducto}`}>
@@ -53,12 +59,12 @@ const HomeProducto = () => {
             }
           </tbody>
         </table>
-        <button 
-          onClick={() => dispatch(startGetAllProductos())}
+        <Link
+          to="/sync/productos/crear"
           className={styles.btn__add}
         >
-          <FontAwesomeIcon className={styles.icon__add} icon={faPlus}/>
-        </button>
+            <FontAwesomeIcon className={styles.icon__add} icon={faPlus}/>
+        </Link>
       </div>
     </section>
   );
