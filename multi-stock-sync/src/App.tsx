@@ -10,16 +10,14 @@ import CierreCaja from './views/PuntoVenta/CierreCaja/CierreCaja';
 import Maestros from './views/PuntoVenta/Maestros/Maestros';
 import Reportes from './views/PuntoVenta/Reportes/Reportes';
 
-import Login from './views/Auth/Login/Login';
-import Register from './views/Auth/Register/Register';
 import RouterAdmin from './router/RouterAdmin';
 import RouterSync from './views/Sync/Router/RouterSync';
+import { AuthRouter } from './auth/Router/AuthRouter';
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/auth/*" element={<AuthRouter />} />
       <Route path="/punto-venta" element={<PuntoVentaDashboard />} />
       <Route path="/punto-venta/despacho" element={<Despacho />} />
       <Route path="/punto-venta/reimprimir" element={<Reimprimir />} />
@@ -34,7 +32,7 @@ function App() {
 
       <Route path="/sync/*" element={<RouterSync/>} />
 
-      <Route path="/*" element={<Navigate to="/sync"/>}/>
+      <Route path="/*" element={<Navigate to="/auth"/>}/>
     </Routes>
 
   );

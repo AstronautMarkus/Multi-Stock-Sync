@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './Register.module.css';
+import styles from '../Css/Register.module.css';
 
-const Register: React.FC = () => {
+export const Register = () => {
   
   const [nombre, setNombre] = useState<string>('');
   const [errorNombre, setErrorNombre] = useState<string[]>([]);
@@ -91,12 +91,11 @@ const Register: React.FC = () => {
       <div className={`${styles.registerContainer}`}>
         <div className={`${styles.registerBox}`}>
           <header className={`${styles.header__registerBox}`}>
-            <h1 className={`${styles.title__header}`}>Multi-Stock-Sync</h1>
+            <h1 className={`${styles.title__header}`}>Registrarse</h1>
           </header>
           <hr/>
           <form className={`${styles.formContainer}`} onSubmit={handleSubmit}>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="nombre" className="form-label">Nombre</label>
               <input
                 className={`form-control`}
                 type="text"
@@ -115,7 +114,6 @@ const Register: React.FC = () => {
               }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="apellidos" className="form-label">Apellidos</label>
               <input
                 className={`form-control`}
                 type="text"
@@ -134,7 +132,6 @@ const Register: React.FC = () => {
               }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="telefono" className="form-label">Teléfono</label>
               <input
                 className={`form-control`}
                 type="text"
@@ -153,12 +150,11 @@ const Register: React.FC = () => {
               }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="nombreNegocio" className="form-label">Nombre del Negocio</label>
               <input
               className={`form-control`}
                 type="text"
                 id="Nombre del negocio"
-                placeholder="Negocio"
+                placeholder="Nombre de negocio"
                 value={nombreNegocio}
                 onChange={(e) => setNombreNegocio(e.target.value)}
               />
@@ -172,7 +168,6 @@ const Register: React.FC = () => {
               }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="username" className="form-label">Email</label>
               <input
                 className={`form-control`}
                 type="email"
@@ -191,7 +186,6 @@ const Register: React.FC = () => {
               }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="password" className="form-label">Contraseña</label>
               <input
                 className={`form-control`}
                 type="password"
@@ -228,7 +222,6 @@ const Register: React.FC = () => {
                 }
             </div>
             <div className={`${styles.item__formContainer}`}>
-              <label htmlFor="passwordConfirmation" className="form-label">Confirmar Contraseña</label>
               <input
               className={`form-control ${styles.input__formContainer}`}
                 type="password"
@@ -277,7 +270,7 @@ const Register: React.FC = () => {
             </button>
             <div className={`${styles.footer__formContainer}`}>
               <p>¿Ya tienes una cuenta?</p>  
-              <Link to="/login" >
+              <Link to="/auth/login" >
                 Iniciar Sesión
               </Link>
             </div>
@@ -287,5 +280,3 @@ const Register: React.FC = () => {
     </>
   );
 };
-
-export default Register;
