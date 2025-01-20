@@ -37,6 +37,24 @@
   width: 100%;
 }
 
+.error__formContainer{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #C23442;
+  border-radius: 5rem;
+  color: #C23442;
+}
+
+.iconError__formContainer{
+  color: #C23442;
+  font-size: 1.2rem;
+}
+
 .btn__loginContainer{
   width: 100%;
   margin-top: 1rem;

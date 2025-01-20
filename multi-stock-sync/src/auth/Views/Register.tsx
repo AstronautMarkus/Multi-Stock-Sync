@@ -36,7 +36,7 @@ export const Register = () => {
       return;
     }
     try {
-      const response = await axios.post(`${process.env.VITE_API_URL}/users`, {
+      const response = await axios.post(`https://linen-anteater-319357.hostingersite.com/api/users`, {
         nombre,
         apellidos,
         telefono,

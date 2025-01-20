@@ -3,15 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type checking = 'checking' | 'authenticated' | 'not-authenticated';
 
 interface AuthState {
-  status: checking,
+  status?: checking,
   nombre: string | null,
   apellidos: string | null,
   telefono: string | null,
   email: string | null,
   nombre_negocio: string| null,
-  password: string | null,
-  password_confirmation: string | null,
-  errorMessage: string | null
+  errorMessage?: string | null
 };
 
 const initialState: AuthState = {
@@ -21,8 +19,6 @@ const initialState: AuthState = {
   telefono: null,
   email: null,
   nombre_negocio: null,
-  password: null,
-  password_confirmation: null,
   errorMessage: null
 };
 
@@ -37,8 +33,6 @@ export const AuthSlice = createSlice({
       state.telefono = payload.telefono
       state.email = payload.email
       state.nombre_negocio = payload.nombre_negocio
-      state.password = payload.password
-      state.password_confirmation = payload.password_confirmation
       state.errorMessage = null
     },
     logout: (state, {payload}) => {
@@ -48,8 +42,6 @@ export const AuthSlice = createSlice({
       state.telefono = null
       state.email = null
       state.nombre_negocio = null
-      state.password = null
-      state.password_confirmation = null
       state.errorMessage = payload?.errorMessage
     },
     checkingCredentials: (state) => {
