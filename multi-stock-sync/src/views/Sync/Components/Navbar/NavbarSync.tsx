@@ -11,7 +11,6 @@ const Navbar = () => {
           <img src="/assets/img/logo/logo-blanco-text.svg" alt="Logo" className={styles.logoImage} />
         </Link>
         <div className="d-flex align-items-center ms-auto">
-
           <div className="dropdown">
             <button
               className={`btn ${styles.iconButton}`}
