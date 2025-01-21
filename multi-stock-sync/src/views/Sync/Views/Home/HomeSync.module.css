@@ -49,6 +49,9 @@
 .connections_color {
     background-color: #FF9800; /* Yellow */
 }
+.connections_color_building {
+    background-color: #00b7ff; /* Yellow */
+}
 
 .icon_products_color {
     color: #4CAF50; /* Green */
@@ -60,6 +63,10 @@
 
 .icon_connections_color {
     color: #FF9800; /* Yellow */
+}
+
+.icon_connections_color_building {
+    background-color: #00b7ff; /* Yellow */
 }
 
 .button:hover {
