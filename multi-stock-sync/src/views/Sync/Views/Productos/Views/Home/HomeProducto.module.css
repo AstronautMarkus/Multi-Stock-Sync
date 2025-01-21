@@ -45,55 +45,55 @@
 }
 
 .btn_actions {
-  width: 100% !important; /* Asegura que el ancho se aplique correctamente, incluso sobre Bootstrap */
+  width: 100% !important; 
   padding: 0.5rem;
   text-align: center;
-  display: block; /* Hace que los botones se comporten como bloques */
+  display: block;
 }
 
 .btn_container {
   display: flex;
-  flex-direction: column; /* Asegura que los botones se alineen verticalmente */
+  flex-direction: column; 
   
-  gap: 100px; /* Espacio entre los botones */
-  align-items: stretch; /* Los botones ocupan el mismo ancho */
-  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+  gap: 100px; 
+  align-items: stretch; 
+  width: 100%;
 }
 
 
 .round_btn {
-  display: flex; /* Centra contenido */
+  display: flex; 
   justify-content: center;
   align-items: center;
-  width: 50px; /* Ancho del botón */
-  height: 50px; /* Altura igual al ancho para un círculo perfecto */
-  background-color: #f39c12; /* Color de fondo */
-  color: #fff; /* Color del texto */
-  border: none; /* Sin bordes */
-  border-radius: 4px; /* Convierte el botón en un círculo */
-  font-size: 18px; /* Tamaño del texto o ícono */
-  font-weight: bold; /* Negrita para el texto */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transición para efectos */
+  width: 50px; 
+  height: 50px; 
+  background-color: #f39c12;
+  color: #fff;
+  border: none; 
+  border-radius: 4px; 
+  font-size: 18px; 
+  font-weight: bold;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-bottom:3% ;
 }
 
 .round_btn:hover {
-  background-color: #e67e22; /* Color al pasar el mouse */
-  transform: scale(1.1); /* Amplía ligeramente el botón */
+  background-color: #e67e22;
+  transform: scale(1.1); 
 }
 
 .round_btn:active {
-  background-color: #d35400; /* Color al hacer clic */
-  transform: scale(0.95); /* Reduce ligeramente el botón */
+  background-color: #d35400;
+  transform: scale(0.95); 
 }
 
 .round_btn:disabled {
-  background-color: #bdc3c7; /* Color para estado deshabilitado */
-  cursor: not-allowed; /* Cursor bloqueado */
+  background-color: #bdc3c7; 
+  cursor: not-allowed; 
 }
 .no_underline {
-  text-decoration: none; /* Elimina el subrayado del enlace */
+  text-decoration: none;
 }
 .customInput{
   margin-left: 10%;
