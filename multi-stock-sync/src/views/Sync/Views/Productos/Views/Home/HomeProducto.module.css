@@ -1,26 +1,26 @@
-*{
+* {
   padding: 0;
   margin: 0;
 }
 
-.HomeProducto{
+.HomeProducto {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   gap: 1rem;
 }
 
-.container__HomeProducto{
+.container__HomeProducto {
   height: 85vh;
   width: 100%;
   padding: 1.5rem;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   border-radius: 1rem;
 }
 
-.search__HomeProducto{
+.search__HomeProducto {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -29,33 +29,8 @@
   margin: 0 0 1rem 0;
 }
 
-.select__HomeProducto{
+.select__HomeProducto {
   cursor: pointer;
-}
-
-.btn__HomeProducto{
-  width: 70%;
-  justify-content: center;
-}
-
-.btn__add {
-  position: absolute;
-  background-color: #EF4624;
-  color: #FFFFFF;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 3rem;
-  bottom: 3rem;
-  border: none;
-  border-radius: 20rem;
-  cursor: pointer;
-}
-
-.icon__add{
-  height: 2rem;
-  width: 2rem;
 }
 
 .img__center {
@@ -69,3 +44,59 @@
   overflow-y: auto;
 }
 
+.btn_actions {
+  width: 100% !important; /* Asegura que el ancho se aplique correctamente, incluso sobre Bootstrap */
+  padding: 0.5rem;
+  text-align: center;
+  display: block; /* Hace que los botones se comporten como bloques */
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: column; /* Asegura que los botones se alineen verticalmente */
+  
+  gap: 100px; /* Espacio entre los botones */
+  align-items: stretch; /* Los botones ocupan el mismo ancho */
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+}
+
+
+.round_btn {
+  display: flex; /* Centra contenido */
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Ancho del botón */
+  height: 50px; /* Altura igual al ancho para un círculo perfecto */
+  background-color: #f39c12; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Convierte el botón en un círculo */
+  font-size: 18px; /* Tamaño del texto o ícono */
+  font-weight: bold; /* Negrita para el texto */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transición para efectos */
+  margin-bottom:3% ;
+}
+
+.round_btn:hover {
+  background-color: #e67e22; /* Color al pasar el mouse */
+  transform: scale(1.1); /* Amplía ligeramente el botón */
+}
+
+.round_btn:active {
+  background-color: #d35400; /* Color al hacer clic */
+  transform: scale(0.95); /* Reduce ligeramente el botón */
+}
+
+.round_btn:disabled {
+  background-color: #bdc3c7; /* Color para estado deshabilitado */
+  cursor: not-allowed; /* Cursor bloqueado */
+}
+.no_underline {
+  text-decoration: none; /* Elimina el subrayado del enlace */
+}
+.customInput{
+  margin-left: 10%;
+  width: 20%;
+  margin-right: 4%;
+}
