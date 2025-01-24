@@ -3,7 +3,7 @@ import styles from './HomeReportes.module.css';
 import axios from 'axios';
 import { LoadingDinamico } from '../../../../../../components/LoadingDinamico/LoadingDinamico';
 import ToastComponent from '../../../../Components/ToastComponent/ToastComponent';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Connection {
   client_id: string;
@@ -28,6 +28,7 @@ const HomeReportes: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastType, setToastType] = useState<'success' | 'warning' | 'danger'>('danger');
+  const navigate = useNavigate();
 
   const currentMonth = new Date().toLocaleString('default', { month: 'long' });
   const currentYear = new Date().getFullYear();
@@ -69,6 +70,12 @@ const HomeReportes: React.FC = () => {
     const clientId = event.target.value;
     setSelectedConnection(clientId);
     if (clientId) fetchStoreSummary(clientId);
+  };
+
+  const handleNavigation = (path: string) => {
+    if (selectedConnection) {
+      navigate(`/sync/reportes/${path}/${selectedConnection}`);
+    }
   };
 
   return (
@@ -133,15 +140,15 @@ const HomeReportes: React.FC = () => {
             <>
               <h3 className="mt-4">Reportes Disponibles</h3>
               <div className="list-group mb-5">
-                <button className="list-group-item list-group-item-action">Ventas totales por mes</button>
-                <button className="list-group-item list-group-item-action">Ventas totales por día</button>
-                <button className="list-group-item list-group-item-action">Ingresos por categoría de producto</button>
-                <button className="list-group-item list-group-item-action">Productos más vendidos</button>
-                <button className="list-group-item list-group-item-action">Ingresos totales por semana</button>
-                <button className="list-group-item list-group-item-action">Estados de órdenes (pagadas, pendientes, canceladas)</button>
-                <button className="list-group-item list-group-item-action">Métodos de pago más utilizados</button>
-                <button className="list-group-item list-group-item-action">Opiniones de clientes por producto</button>
-                <button className="list-group-item list-group-item-action">Devoluciones o reembolsos por categoría</button>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-mes/${selectedConnection}`}>Ventas totales por mes</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-dia/${selectedConnection}`}>Ventas totales por día</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingresos-categoria-producto/${selectedConnection}`}>Ingresos por categoría de producto</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/productos-mas-vendidos/${selectedConnection}`}>Productos más vendidos</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingreso-semana/${selectedConnection}`}>Ingresos totales por semana</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/estados-ordenes/${selectedConnection}`}>Estados de órdenes (pagadas, pendientes, canceladas)</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/metodos-pago/${selectedConnection}`}>Métodos de pago más utilizados</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/opiniones-clientes/${selectedConnection}`}>Opiniones de clientes por producto</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/devoluciones-reembolsos/${selectedConnection}`}>Devoluciones o reembolsos por categoría</Link>
               </div>
             </>
           )}
