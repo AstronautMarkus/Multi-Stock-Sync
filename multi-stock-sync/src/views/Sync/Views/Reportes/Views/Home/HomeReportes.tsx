@@ -72,11 +72,7 @@ const HomeReportes: React.FC = () => {
     if (clientId) fetchStoreSummary(clientId);
   };
 
-  const handleNavigation = (path: string) => {
-    if (selectedConnection) {
-      navigate(`/sync/reportes/${path}/${selectedConnection}`);
-    }
-  };
+
 
   return (
     <>
@@ -137,7 +133,7 @@ const HomeReportes: React.FC = () => {
             </div>
           )}
           {selectedConnection && (
-            <>
+            <>ventasPorMes
               <h3 className="mt-4">Reportes Disponibles</h3>
               <div className="list-group mb-5">
                 <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-mes/${selectedConnection}`}>Ventas totales por mes</Link>
