@@ -133,7 +133,7 @@ const HomeReportes: React.FC = () => {
             </div>
           )}
           {selectedConnection && (
-            <>ventasPorMes
+            <>
               <h3 className="mt-4">Reportes Disponibles</h3>
                 <div className="list-group mb-5">
                 <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-mes/${selectedConnection}`} target="_blank">Ventas totales por mes</Link>
