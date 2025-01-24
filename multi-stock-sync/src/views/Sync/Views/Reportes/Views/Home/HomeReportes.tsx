@@ -3,7 +3,7 @@ import styles from './HomeReportes.module.css';
 import axios from 'axios';
 import { LoadingDinamico } from '../../../../../../components/LoadingDinamico/LoadingDinamico';
 import ToastComponent from '../../../../Components/ToastComponent/ToastComponent';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Connection {
   client_id: string;
@@ -28,7 +28,7 @@ const HomeReportes: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastType, setToastType] = useState<'success' | 'warning' | 'danger'>('danger');
-  const navigate = useNavigate();
+
 
   const currentMonth = new Date().toLocaleString('default', { month: 'long' });
   const currentYear = new Date().getFullYear();
