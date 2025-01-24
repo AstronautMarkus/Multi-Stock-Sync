@@ -135,17 +135,17 @@ const HomeReportes: React.FC = () => {
           {selectedConnection && (
             <>ventasPorMes
               <h3 className="mt-4">Reportes Disponibles</h3>
-              <div className="list-group mb-5">
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-mes/${selectedConnection}`}>Ventas totales por mes</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-dia/${selectedConnection}`}>Ventas totales por día</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingresos-categoria-producto/${selectedConnection}`}>Ingresos por categoría de producto</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/productos-mas-vendidos/${selectedConnection}`}>Productos más vendidos</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingreso-semana/${selectedConnection}`}>Ingresos totales por semana</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/estados-ordenes/${selectedConnection}`}>Estados de órdenes (pagadas, pendientes, canceladas)</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/metodos-pago/${selectedConnection}`}>Métodos de pago más utilizados</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/opiniones-clientes/${selectedConnection}`}>Opiniones de clientes por producto</Link>
-                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/devoluciones-reembolsos/${selectedConnection}`}>Devoluciones o reembolsos por categoría</Link>
-              </div>
+                <div className="list-group mb-5">
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-mes/${selectedConnection}`} target="_blank">Ventas totales por mes</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ventas-dia/${selectedConnection}`} target="_blank">Ventas totales por día</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingresos-categoria-producto/${selectedConnection}`} target="_blank">Ingresos por categoría de producto</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/productos-mas-vendidos/${selectedConnection}`} target="_blank">Productos más vendidos</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/ingreso-semana/${selectedConnection}`} target="_blank">Ingresos totales por semana</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/estados-ordenes/${selectedConnection}`} target="_blank">Estados de órdenes (pagadas, pendientes, canceladas)</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/metodos-pago/${selectedConnection}`} target="_blank">Métodos de pago más utilizados</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/opiniones-clientes/${selectedConnection}`} target="_blank">Opiniones de clientes por producto</Link>
+                <Link className="list-group-item list-group-item-action" to={`/sync/reportes/devoluciones-reembolsos/${selectedConnection}`} target="_blank">Devoluciones o reembolsos por categoría</Link>
+                </div>
             </>
           )}
           <Link to="/sync/home" className='btn btn-primary mb-5'>Volver a inicio</Link>
