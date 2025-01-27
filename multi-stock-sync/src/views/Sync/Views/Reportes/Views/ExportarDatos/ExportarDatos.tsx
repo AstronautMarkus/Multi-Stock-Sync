@@ -4,8 +4,10 @@ import React, { useState } from "react";
 // import "jspdf-autotable";
 // import { saveAs } from "file-saver";
 import styles from './ExportarDatos.module.css';
+import { useParams } from 'react-router-dom';
 
 const ExportarDatos: React.FC = () => {
+<<<<<<< HEAD
 // Datos estáticos para prueba
 const [data] = useState([
         {
@@ -136,6 +138,15 @@ const [data] = useState([
             >
             Exportar a PDF
             </button>
+=======
+    const { client_id } = useParams<{ client_id: string }>();
+
+    return (
+        <div>
+            <h1>Exportar Datos</h1>
+            <p>Esta es la página de exportación de datos.</p>
+            <p>Estado actual: {client_id}</p>
+>>>>>>> 0673b898356c5cd49102b15ead2bd1ccfc8f6a11
         </div>
     </div>
     );
