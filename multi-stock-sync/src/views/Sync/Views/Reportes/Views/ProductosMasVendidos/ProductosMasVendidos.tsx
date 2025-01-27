@@ -1,165 +1,212 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Bar, Pie } from "react-chartjs-2";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Dropdown } from 'react-bootstrap'; // Para el dropdown del gráfico
+import { Bar } from 'react-chartjs-2'; // Asegúrate de tener instalado chart.js y react-chartjs-2
 
-const ProductosMasVendidos: React.FC = () => {
+const Productos: React.FC = () => {
     const { client_id } = useParams<{ client_id: string }>();
-    const [data, setData] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [productos, setProductos] = useState<any[]>([]); // Para almacenar los productos
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedMonth, setSelectedMonth] = useState<string>('2024-10'); // Fecha por defecto (2024-10)
+    const [currentPage, setCurrentPage] = useState<number>(1); // Página actual
+    const [itemsPerPage] = useState<number>(10); // Número de elementos por página
+    const [itemsPerGraph, setItemsPerGraph] = useState<number>(10); // Número de elementos para el gráfico
 
-    // Estado para la paginación
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    // Maneja el cambio en el input de tipo month
+    const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedMonth(e.target.value); // Actualiza el estado con el nuevo valor de mes
+    };
 
+    // Fetch de los productos
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProductos = async () => {
         try {
-            const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/mercadolibre/top-selling-products/${client_id}`
+            const [year, month] = selectedMonth.split('-'); // Separa el valor de la fecha en año y mes
+            const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/mercadolibre/top-selling-products/${client_id}?year=${year}&month=${month}`
             );
-
-            if (response.data.status === "success" && Array.isArray(response.data.data)) {
-            setData(response.data.data);
+            const data = await response.json();
+            if (data.status === 'success') {
+            setProductos(data.data); // Almacenar los productos obtenidos
             } else {
-            setError("Error al procesar los datos recibidos.");
+            setError('No se pudieron obtener los productos');
             }
-        } catch (err) {
-            console.error("Error al conectar con la API:", err);
-            setError("No se pudo conectar con la API.");
+        } catch (error) {
+            setError('Error al hacer la solicitud');
         } finally {
             setLoading(false);
         }
         };
 
-        fetchProducts();
-    }, [client_id]);
+        fetchProductos();
+    }, [client_id, selectedMonth]); // Dependencia para que vuelva a llamar la API cuando se cambia el mes
 
-    if (loading) return <p>Cargando datos...</p>;
-    if (error) return <p>Error: {error}</p>;
+    // Calcular los productos a mostrar en la página actual
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  // Obtener métricas
-    const mostSoldProduct = data.reduce((prev, current) =>
-        current.quantity > prev.quantity ? current : prev
-    );
-    const mostRepeatedProduct = data.reduce((prev, current) =>
-        current.total_sales > prev.total_sales ? current : prev
-    );
-    const leastSoldProduct = data.reduce((prev, current) =>
-        current.quantity < prev.quantity ? current : prev
-    );
+    // Cambiar la página
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // Datos para la paginación
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-    // Manejo de la paginación
-    const totalPages = Math.ceil(data.length / itemsPerPage);
-    const nextPage = () => {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-    };
-    const prevPage = () => {
-        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    // Cambiar la cantidad de productos que se muestran en el gráfico
+    const handleGraphItemsChange = (value: number) => {
+        setItemsPerGraph(value);
     };
 
-  // Datos para los gráficos
-    const chartDataBar = {
-        labels: data.map((item) => item.title),
+    // Configuración para el gráfico de barras
+    const chartData = {
+        labels: productos.slice(0, itemsPerGraph).map((producto) => producto.title),
         datasets: [
         {
-            label: "Cantidad Vendida",
-            data: data.map((item) => item.quantity),
-            backgroundColor: "rgba(75, 192, 192, 0.5)",
-            borderColor: "rgba(75, 192, 192, 1)",
+            label: 'Precio Total',
+            data: productos.slice(0, itemsPerGraph).map((producto) => producto.total_amount),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
         },
         ],
     };
 
-    const chartDataPie = {
-        labels: data.map((item) => item.title),
-        datasets: [
-        {
-            label: "Ventas Totales",
-            data: data.map((item) => item.total_sales),
-            backgroundColor: data.map(
-            () => `hsl(${Math.random() * 360}, 70%, 70%)` // Colores aleatorios
-            ),
-            borderWidth: 1,
+    const chartOptions = {
+        scales: {
+        y: {
+            beginAtZero: true,
         },
-        ],
+        },
     };
+
+    // Función para obtener el producto más vendido y el menos vendido
+    const getMostAndLeastSoldProduct = () => {
+        if (productos.length === 0) return { mostSold: null, leastSold: null };
+
+        const sortedByTotal = [...productos].sort((a, b) => b.total_amount - a.total_amount);
+        const mostSold = sortedByTotal[0];  // Producto más vendido
+        const leastSold = sortedByTotal[sortedByTotal.length - 1]; // Producto menos vendido
+
+        return { mostSold, leastSold };
+    };
+
+    const { mostSold, leastSold } = getMostAndLeastSoldProduct();
 
     return (
-        <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Productos Más Vendidos</h1>
+        <div>
+        <h1 className="text-center">Productos</h1>
 
-        {/* Tarjetas */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-white shadow rounded-lg p-4">
-            <h2 className="text-lg font-semibold">Producto Más Vendido</h2>
-            <p>{mostSoldProduct.title}</p>
-            <p className="text-sm text-gray-600">Cantidad: {mostSoldProduct.quantity}</p>
+        {/* Tarjetas de Producto Más Vendido y Menos Vendido */}
+        <div className="d-flex justify-content-around mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+            <div className="card-body">
+                <h5 className="card-title">Producto Más Vendido</h5>
+                {mostSold ? (
+                <>
+                    <h6 className="card-subtitle mb-2 text-muted">{mostSold.title}</h6>
+                    <p className="card-text">Cantidad: {mostSold.quantity}</p>
+                    <p className="card-text">Total: ${mostSold.total_amount}</p>
+                </>
+                ) : (
+                <p className="card-text">No hay datos disponibles.</p>
+                )}
             </div>
-            <div className="bg-white shadow rounded-lg p-4">
-            <h2 className="text-lg font-semibold">Producto Más Repetido</h2>
-            <p>{mostRepeatedProduct.title}</p>
-            <p className="text-sm text-gray-600">Total Ventas: {mostRepeatedProduct.total_sales}</p>
             </div>
-            <div className="bg-white shadow rounded-lg p-4">
-            <h2 className="text-lg font-semibold">Producto Menos Vendido</h2>
-            <p>{leastSoldProduct.title}</p>
-            <p className="text-sm text-gray-600">Cantidad: {leastSoldProduct.quantity}</p>
+
+            <div className="card" style={{ width: '18rem' }}>
+            <div className="card-body">
+                <h5 className="card-title">Producto Menos Vendido</h5>
+                {leastSold ? (
+                <>
+                    <h6 className="card-subtitle mb-2 text-muted">{leastSold.title}</h6>
+                    <p className="card-text">Cantidad: {leastSold.quantity}</p>
+                    <p className="card-text">Total: ${leastSold.total_amount}</p>
+                </>
+                ) : (
+                <p className="card-text">No hay datos disponibles.</p>
+                )}
+            </div>
             </div>
         </div>
 
-      {/* Listado Paginado */}
-        <div className="bg-white shadow rounded-lg p-4 mb-6">
-            <h2 className="text-lg font-semibold mb-4">Listado de Productos</h2>
-            <ul>
-            {currentItems.map((item) => (
-                <li
-                key={item.id}
-                className="border-b py-2 flex justify-between items-center"
-                >
-                <span>{item.title}</span>
-                <span className="text-gray-600">Cantidad: {item.quantity}</span>
-                </li>
-            ))}
-            </ul>
-            <div className="flex justify-between mt-4">
+        {/* Selector de mes y año */}
+        <div className="text-center mb-3">
+            <label htmlFor="monthSelector">Selecciona el mes y año:</label>
+            <input
+            type="month"
+            id="monthSelector"
+            value={selectedMonth}
+            onChange={handleMonthChange}
+            />
+        </div>
+
+        {loading && <p className="text-center">Cargando productos...</p>}
+        {error && <p className="text-center">{error}</p>}
+
+        {/* Tabla de productos */}
+        <div className="table-responsive d-flex justify-content-center">
+            <table className="table table-bordered" style={{ width: '80%' }}>
+            <thead>
+                <tr>
+                <th>Título</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {currentProducts.map((producto, index) => (
+                <tr key={index}>
+                    <td>{producto.title}</td>
+                    <td>{producto.quantity}</td>
+                    <td>${producto.total_amount}</td>
+                </tr>
+                ))}
+            </tbody>
+            </table>
+        </div>
+
+        {/* Paginación de la tabla */}
+        <div className="d-flex justify-content-center mt-3">
             <button
-                className="px-4 py-2 bg-gray-200 rounded"
-                onClick={prevPage}
-                disabled={currentPage === 1}
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="btn btn-primary"
             >
-                Anterior
+            Anterior
             </button>
+            <span className="mx-2">Página {currentPage}</span>
             <button
-                className="px-4 py-2 bg-gray-200 rounded"
-                onClick={nextPage}
-                disabled={currentPage === totalPages}
+            onClick={() => paginate(currentPage + 1)}
+            disabled={indexOfLastProduct >= productos.length}
+            className="btn btn-primary"
             >
-                Siguiente
+            Siguiente
             </button>
-            </div>
         </div>
 
-      {/* Gráficos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white shadow rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Gráfico de Barras</h2>
-            <Bar data={chartDataBar} options={{ responsive: true }} />
-            </div>
-            <div className="bg-white shadow rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Gráfico de Torta</h2>
-            <Pie data={chartDataPie} options={{ responsive: true }} />
-            </div>
+        {/* Dropdown para cambiar cantidad de datos en el gráfico */}
+        <div className="text-center mb-3">
+            <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="dropdownMenuButton">
+                Seleccionar cantidad de datos para el gráfico
+            </Dropdown.Toggle>
+            <Dropdown.Menu aria-labelledby="dropdownMenuButton">
+                {[10, 25, 50, 100, 1000].map((option) => (
+                <Dropdown.Item key={option} onClick={() => handleGraphItemsChange(option)}>
+                    Mostrar {option} productos
+                </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+            </Dropdown>
         </div>
+
+      {/* Gráfico de barras */}
+        {productos.length > 0 && (
+            <div className="mt-5">
+            <h3 className="text-center">Gráfico de Barra: Precio Total de Productos</h3>
+            <Bar data={chartData} options={chartOptions} />
+            </div>
+        )}
         </div>
     );
 };
 
-export default ProductosMasVendidos;
+export default Productos;
