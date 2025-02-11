@@ -74,7 +74,6 @@
   color: #FFFFFF;
   background-color: #17a2b8;
   flex-basis: 5%;
-  border-radius: 20% 0 0 20%;
 }
 
 .rowHead__item2{
@@ -154,7 +153,6 @@
   color: #FFFFFF;
   background-color: #17a2b8;
   flex-basis: 5%;
-  border-radius: 0 20% 20% 0;
 }
 /*TBODY-----------------------------------------------------------------------------------------------------------*/
 .table__tBody{
@@ -187,7 +185,6 @@
   overflow: hidden;
   flex-basis: 5%;
   justify-content: center;
-  border-radius: 20% 0 0 20%;
 }
 .rowBody__item2{
   padding: 0;
@@ -274,7 +271,6 @@
   color: rgba(0, 0, 0, 0.7);
   background-color: #E6E6E6;
   flex-basis: 5%;
-  border-radius: 0 20% 20% 0;
 }
 
 .item7__btn{
