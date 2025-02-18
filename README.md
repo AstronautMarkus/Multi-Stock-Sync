@@ -74,7 +74,11 @@ Este proyecto tiene como objetivo gestionar y mejorar la experiencia de ventas a
    - ❌ No implementado
    - ✔ Implementado
 
-18. **Avanzar con opiniones de Clientes, mostrar las opiniones de los clientes en la lista de productos en la lista de productos en el botón de acciones**
+18. **Avanzar con opiniones de Clientes, mostrar las opiniones de los clientes en la lista de productos en el botón de acciones**
+   - ❌ No implementado
+   - ✔ Implementado
+
+19. **En lista de productos mostrar la categoría y no el código de la categoría**
    - ❌ No implementado
    - ✔ Implementado
 
