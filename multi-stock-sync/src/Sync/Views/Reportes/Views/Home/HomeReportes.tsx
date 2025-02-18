@@ -62,8 +62,6 @@ const HomeReportes: React.FC = () => {
     try {
       const response = await axiosInstance.get(`${process.env.VITE_API_URL}/mercadolibre/summary/${clientId}`);
       setStoreSummary(response.data.data);
-      setToastMessage('Resumen de la tienda cargado con éxito.');
-      setToastType('success');
     } catch (error) {
       console.error('Error al obtener el resumen de la tienda:', error);
       setToastMessage((error as any).response?.data?.message || 'Error al obtener el resumen de la tienda');
