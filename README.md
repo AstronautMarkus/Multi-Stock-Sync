@@ -1,8 +1,4 @@
-# Proyecto de Gestión de Ventas
-
-Este proyecto tiene como objetivo gestionar y mejorar la experiencia de ventas a través de diferentes funcionalidades que permiten un análisis detallado de los productos y ventas. A continuación se detallan las tareas y mejoras planificadas.
-
-## Tareas y Mejoras
+# Tareas y Mejoras
 
 1. **Agregar en lista de productos los números de la página**
    - ❌ No implementado
