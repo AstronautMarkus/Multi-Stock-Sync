@@ -45,6 +45,11 @@ const HomeReportes: React.FC = () => {
         setToastMessage((error as any).response?.data?.message || 'Error al obtener las conexiones');
         setToastType('danger');
       } finally {
+        const savedConnection = localStorage.getItem('selectedConnection');
+        if (savedConnection) {
+          setSelectedConnection(savedConnection);
+          await fetchStoreSummary(savedConnection);
+        }
         setLoading(false);
       }
     };
@@ -71,7 +76,14 @@ const HomeReportes: React.FC = () => {
   const handleConnectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const clientId = event.target.value;
     setSelectedConnection(clientId);
-    if (clientId) fetchStoreSummary(clientId);
+    localStorage.setItem('selectedConnection', clientId);
+    if (clientId) {
+      fetchStoreSummary(clientId);
+    } else {
+      setStoreSummary(null);
+      setLoading(true);
+      setTimeout(() => setLoading(false), 1000); // Simulate loading screen
+    }
   };
 
   return (
