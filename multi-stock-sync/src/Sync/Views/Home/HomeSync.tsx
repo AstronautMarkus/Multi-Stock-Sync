@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./HomeSync.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBoxOpen, faWarehouse, faPlug, faFolderOpen, faServer } from "@fortawesome/free-solid-svg-icons";
+import { faBoxOpen, faPlug, faFolderOpen, faServer } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const HomeSync: React.FC = () => {
@@ -15,10 +15,10 @@ const HomeSync: React.FC = () => {
             color: "bg-primary"
         },
         { 
-            title: "Bodegas", 
-            description: "Gestiona el inventario de tus productos.", 
-            icon: faWarehouse, 
-            link: "/sync/bodegas", 
+            title: "Reportes", 
+            description: "Gestiona y exporta datos de tus productos.", 
+            icon: faFolderOpen, 
+            link: "/sync/reportes", 
             color: "bg-success"
         },
         { 
@@ -26,14 +26,7 @@ const HomeSync: React.FC = () => {
             description: "Conecta nuevas cuentas de empresas a Mercado Libre.", 
             icon: faPlug, 
             link: "/sync/conexiones", 
-            color: "bg-warning"
-        },
-        { 
-            title: "Reportes", 
-            description: "Gestiona y exporta datos de tus productos.", 
-            icon: faFolderOpen, 
-            link: "/sync/reportes", 
-            color: "bg-info"
+            color: "bg-danger"
         },
         {
             title:"Información",
