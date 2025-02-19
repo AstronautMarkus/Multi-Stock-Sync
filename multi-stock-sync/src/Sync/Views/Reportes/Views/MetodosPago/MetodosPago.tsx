@@ -17,6 +17,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { LoadingDinamico } from '../../../../../components/LoadingDinamico/LoadingDinamico';
 import axiosInstance from '../../../../../axiosConfig';
+
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const MetodosPago: React.FC = () => {
@@ -281,16 +282,20 @@ const MetodosPago: React.FC = () => {
                         key={3}
                       />
                     </ProgressBar>
-                    <button
-                      type="button"
-                      className="btn btn-primary mt-3 mx-3"
-                      onClick={generatePDF}
-                    >
-                      Exportar a PDF
-                    </button>
 
-                    <button className='btn btn-primary mt-3' onClick={generateExcel}>Exportar a Excel</button>
+                    <div className="botones-exportar mt-4 d-flex justify-content-center">
+                      <button
+                        type="button"
+                        className="btn btn-primary mx-3"
+                        onClick={generatePDF}
+                      >
+                        Exportar a PDF
+                      </button>
 
+                      <button className="btn btn-success mx-3" onClick={generateExcel}>
+                        Exportar a Excel
+                      </button>
+                    </div>
                   </div>
                 </div>
               </Card.Body>
