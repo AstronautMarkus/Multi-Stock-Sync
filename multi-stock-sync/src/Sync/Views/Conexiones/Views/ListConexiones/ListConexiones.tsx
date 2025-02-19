@@ -137,7 +137,7 @@ const ListConexiones: React.FC = () => {
       </header>
       {conexiones.length === 0 ? (
         <div className={styles.container__table}>
-          <img src="/assets/img/icons/link_notfound.svg" alt="No Connections" />
+          <img src="/assets/img/icons/link_notfound.svg" className='rounded img-fluid' alt="IMG producto" style={{ maxWidth: '100px' }}/>
           <strong className="mb-5">No se han encontrado conexiones guardadas en el sistema, por favor, cree una nueva conexión.</strong>
         </div>
       ) : (
